@@ -1,12 +1,8 @@
 /*
 Piezo Flasher
-For Piezo Flasher Hardware v1.1
+For Piezo Flasher Hardware v2.0
 
-Modifications needed for v1.1 hardware:
-- replace D1 with 0R
-- add jumper from MODE0 to PIXEL
-
-Copyright (c) 2016 Shunya Sato
+Copyright (c) 2018 Shunya Sato
 Author: Shunya Sato
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -41,12 +37,10 @@ THE SOFTWARE.
 #define DEBUG true
 #define SOUND true  // true: turn sound on, false: turn sound off for testing silently
 
-#define PIXEL_COUNT 6
+#define PIXEL_COUNT 1
 
 const int piezoPin = 3;
-const int pixelPin = 10; // somehow A0 doesn't work...??
-// A0 works fine on Arduino Uno. But not on ATmega328 on a breadboard with 8MHz internal clock
-// v1.1 hardware must implement jumper wire from Pin 10 to A0
+const int pixelPin = 10;
 const int pixPWRPin = A1;
 const int modePins[] = {6, 5}; // use pin 10 for neopixel
 
@@ -140,8 +134,6 @@ void setup()
 {
   Serial.begin(115200);
   Serial.println(F("### Piezo Flasher ###"));
-  pinMode(A0, INPUT); // using A0 to control neopixel didn't work somehow...
-  digitalWrite(A0, LOW); // make sure internal pullup is not set
 
   pinMode(piezoPin, INPUT);
   pinMode(pixPWRPin, OUTPUT);
